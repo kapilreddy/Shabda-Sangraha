@@ -1,0 +1,18 @@
+{% extends "search.html" %}
+{% block results %}
+  <ul class=entries>
+
+  <h1>{{ entries['lemma'] }}</h1>
+   {% for antonym in entries['antonym'] %}
+   	<p>{{antonym}}</p>
+   {% endfor %}
+
+  {% for entry in entries['gloss'] %}
+    <li>
+	<h2><b>{{entry['pos']}}</b>, {{entry['def']}}</h2>
+    </li>
+
+  {% endfor %}
+  </ul>
+{% endblock %}
+

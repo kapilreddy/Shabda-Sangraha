@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block body %}
+  <h1>Shabda Sangrah</h1>
+  {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+	<div id="searchform">
+	  <form action="{{ url_for('search') }}" method=post>
+	     <input type=text id=word name=word>
+	     <input type=submit value=Search>
+	  </form>
+	</div>
+	{% block results %} {% endblock %}
+{% endblock %}
+
