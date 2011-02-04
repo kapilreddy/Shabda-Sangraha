@@ -3,7 +3,7 @@ Shabda Sangrah
 =========
 
 :version: 0.0.1
-:author: Kapil Reddy (http://www.fs-tools.de)
+:author: Kapil Reddy
 
 This is a english word dictionary built with flask (python) and mongodb.
 
