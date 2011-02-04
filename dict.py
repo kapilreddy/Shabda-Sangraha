@@ -58,20 +58,25 @@ def words_import():
 @app.route('/search', methods=['GET', 'POST'])
 def search():
 	word = ''
+	result = {}
 	if request.method == 'POST' :
 		word = request.form['word']
 	elif request.method == 'GET':
 		word = request.args['word']
+	word = word.strip()
 	if(word!=''):
 		
 		words = g.mongodb.words
-		result = words.find_one({"lemma":word })
+		entries = words.find_one({"lemma":word })
 		
-		if(result==None):
-			result = {"suggest": correct(word)}
+		if(entries==None):
+			result["suggest"]=correct(word)
 		else:
 			result['suggest'] = ''
-		return render_template('results.html',entries=result)
+
+		result['entries']=entries		
+
+		return render_template('results.html',result=result)
 	else:
 		return render_template('search.html')
 

@@ -1,13 +1,23 @@
 {% extends "search.html" %}
 {% block results %}
   <ul class=entries>
+	
+  <h1>{{ result['entries']['lemma'] }}</h1>
+	{% if not(result['suggest'] == '') %}
+	<p>Did you mean <a href="/search?word={{result['suggest']}}">{{result['suggest']}}</a></p>
+	{% endif %}
 
-  <h1>{{ entries['lemma'] }}</h1>
-   {% for antonym in entries['antonym'] %}
-   	<p>{{antonym}}</p>
-   {% endfor %}
+	{% if result['entries']['synonym'] %}
+	<p> Similar words:
+		{% for entry in result['entries']['synonym'] %}
+		 <a href="/search?word={{entry}}">{{entry}}</a>
+		{% endfor %}
+	</p>
+	{% endif %}
 
-  {% for entry in entries['gloss'] %}
+
+
+  {% for entry in result['entries']['gloss'] %}
     <li>
 	<h2><b>{{entry['pos']}}</b>, {{entry['def']}}</h2>
     </li>
