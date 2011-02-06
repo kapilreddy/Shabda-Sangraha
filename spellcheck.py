@@ -2,6 +2,9 @@ import re, collections
 import os
 import sys
 from pymongo import Connection,DESCENDING
+from math import *
+import datetime
+
 def connect_mongodb():
 	connection = Connection('localhost', 27017);
 	db = connection.wordnet
@@ -41,24 +44,42 @@ def edits1(word):
 
 def known_edits2(word):
 	words = mongodb.words
-	return set(e2 for e1 in edits1(word) for e2 in edits1(e1) if not(None==words.find_one({"lemma":e2})))
+	result = set([])
+	for e1 in edits1(word):
+		for e2 in edits1(e1):
+			result.add(e2)
+	if(len(result)>40000):
+		return set([])
+	result1=  words.find({"lemma":{"$in":list(result)}},{"lemma":1})
+	result2= set([])
+	for r1 in result1:
+		result2.add(r1['lemma'])
+	return result2
 
 def known(words): 
 	wordscoll = mongodb.words
-	return set(w for w in words if not(None==wordscoll.find_one({"lemma":w})))
+	result = set([])
+	for r1 in wordscoll.find({"lemma":{"$in":list(words)}}):
+		result.add(r1['lemma'])
+	return set(result)
+
 
 def correct(word):
-    candidates = known([word]) or known(edits1(word)) or known_edits2(word) or [word]
-    candidates = list(candidates)
-    words = mongodb.words
-    result = words.find({"lemma":{"$in":candidates}}).sort("score", DESCENDING)
-    for r in result:
-	    return r['lemma']
+	candidates = known([word]) or known(edits1(word)) or known_edits2(word) or [word]
+	candidates = list(candidates)
+	words = mongodb.words
+	result = words.find({"lemma":{"$in":candidates}}).sort("score", DESCENDING)
+	for r in result:
+		return r['lemma'] 
 
-"""
-print sys.argv[1]
+"""print sys.argv[1]
 
-result = correct(sys.argv[1])
-if(result!=sys.argv[1]):#
-	print "Did you mean "+result+" ?"
-"""
+t1 = datetime.datetime.now()
+print correct(sys.argv[1])
+t2 = datetime.datetime.now()
+td = t2-t1
+print(td.seconds,"time taken")"""
+"""if(result!=sys.argv[1]):#
+	print "Did you mean "+result+" ?" """
+
+

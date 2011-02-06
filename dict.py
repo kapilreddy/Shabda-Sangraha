@@ -70,7 +70,11 @@ def search():
 		entries = words.find_one({"lemma":word })
 		
 		if(entries==None):
-			result["suggest"]=correct(word)
+			suggest=correct(word)
+			if(suggest==None):
+				return render_template('notfound.html')
+			else:
+				result["suggest"]=suggest
 		else:
 			result['suggest'] = ''
 

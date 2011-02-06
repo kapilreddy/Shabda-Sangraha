@@ -1,0 +1,28 @@
+mongod --help for help and startup options
+Sun Feb  6 17:36:19 MongoDB starting : pid=19212 port=27017 dbpath=/data/db/ 32-bit 
+
+** NOTE: when using MongoDB 32 bit, you are limited to about 2 gigabytes of data
+**       see http://blog.mongodb.org/post/137788967/32-bit-limitations
+
+Sun Feb  6 17:36:19 db version v1.6.5, pdfile version 4.5
+Sun Feb  6 17:36:19 git version: 0eb017e9b2828155a67c5612183337b89e12e291
+Sun Feb  6 17:36:19 sys info: Linux domU-12-31-39-01-70-B4 2.6.21.7-2.fc8xen #1 SMP Fri Feb 15 12:39:36 EST 2008 i686 BOOST_LIB_VERSION=1_37
+Sun Feb  6 17:36:19 [initandlisten] waiting for connections on port 27017
+Sun Feb  6 17:36:19 [websvr] web admin interface listening on port 28017
+Sun Feb  6 17:36:23 got kill or ctrl c or hup signal 1 (Hangup), will terminate after current cmd ends
+Sun Feb  6 17:36:23 [interruptThread] now exiting
+Sun Feb  6 17:36:23 dbexit: 
+
+Sun Feb  6 17:36:23 [interruptThread] shutdown: going to close listening sockets...
+Sun Feb  6 17:36:23 [interruptThread] closing listening socket: 5
+Sun Feb  6 17:36:23 [interruptThread] closing listening socket: 6
+Sun Feb  6 17:36:23 [interruptThread] closing listening socket: 7
+Sun Feb  6 17:36:23 [interruptThread] closing listening socket: 8
+Sun Feb  6 17:36:23 [interruptThread] shutdown: going to flush oplog...
+Sun Feb  6 17:36:23 [interruptThread] shutdown: going to close sockets...
+Sun Feb  6 17:36:23 [interruptThread] shutdown: waiting for fs preallocator...
+Sun Feb  6 17:36:23 [interruptThread] shutdown: closing all files...
+Sun Feb  6 17:36:23     closeAllFiles() finished
+
+Sun Feb  6 17:36:23 [interruptThread] shutdown: removing fs lock...
+Sun Feb  6 17:36:23 dbexit: really exiting now
